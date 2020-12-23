@@ -11,7 +11,7 @@ def do_pack():
     local("mkdir -p versions")
     local("tar -czvf {} web_static/".format(dest))
     archive_path = local("ls -t versions/ | head -1",
-                                       capture=True)
+                         capture=True)
     if archive_path is None or archive_path == "":
         return None
     return "/versions" + archive_path
