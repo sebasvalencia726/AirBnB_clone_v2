@@ -14,4 +14,6 @@ def do_pack():
                          capture=True)
     if archive_path is None or archive_path == "":
         return None
-    return "/versions" + archive_path
+    else:
+        archive_path = "versions/" + archive_path
+        return archive_path

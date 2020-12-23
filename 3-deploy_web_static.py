@@ -11,6 +11,7 @@ def deploy():
     """
     try:
         archive_path = do_pack()
+        print("archive_path", archive_path)
         if archive_path is None:
             return False
         toReturn = do_deploy(archive_path)
