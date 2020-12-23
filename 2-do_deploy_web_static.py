@@ -11,12 +11,15 @@ def do_deploy(archive_path):
         lista = archive_path.split('/')
         folder = lista[-1][:lista[-1].find(".")]
         dest = "/data/web_static/releases/" + folder
-        sudo("mkdir -p {}".format(dest))
-        sudo("tar -xzf {} -C {}".format(test[0], dest))
-        sudo("rm {}".format(test[0]))
-        sudo("rm -rf /data/web_static/current")
-        sudo("ln -s /data/web_static/releases/{} /data/web_static/current".
-             format(folder))
+        run("mkdir -p {}".format(dest))
+        run("tar -xzf {} -C {}".format(test[0], dest))
+        run("rm {}".format(test[0]))
+        run("mv /data/web_static/releases/{}/web_static/* \
+            /data/web_static/releases/{}/".format(folder, folder))
+        run("rm -rf /data/web_static/releases/{}/web_static".format(folder))
+        run("rm -rf /data/web_static/current")
+        run("ln -s /data/web_static/releases/{} /data/web_static/current".
+            format(folder))
         return True
     except Exception as e:
         return False
