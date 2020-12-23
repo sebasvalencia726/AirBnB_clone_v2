@@ -9,12 +9,8 @@ env.user = "ubuntu"
 def deploy():
     """Fabric script that creates and distributes an archive to web servers.
     """
-    try:
-        archive_path = do_pack()
-        print("archive_path", archive_path)
-        if archive_path is None:
-            return False
-        toReturn = do_deploy(archive_path)
-        return toReturn
-    except Exception as e:
+    archive_path = do_pack()
+    if archive_path is None:
         return False
+    toReturn = do_deploy(archive_path)
+    return toReturn
