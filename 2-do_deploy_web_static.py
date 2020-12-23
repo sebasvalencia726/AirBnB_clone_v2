@@ -7,7 +7,7 @@ env.user = "ubuntu"
 def do_deploy(archive_path):
     """Fabric script that distributes an archive to web servers."""
     try:
-        test = put(archive_path, "/tmp/", use_sudo=True)
+        test = put(archive_path, "/tmp/")
         lista = archive_path.split('/')
         folder = lista[-1][:lista[-1].find(".")]
         dest = "/data/web_static/releases/" + folder
@@ -21,5 +21,5 @@ def do_deploy(archive_path):
         run("ln -s /data/web_static/releases/{} /data/web_static/current".
             format(folder))
         return True
-    except Exception as e:
+    except Exception:
         return False
