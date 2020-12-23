@@ -10,6 +10,8 @@ def do_pack():
     dest = "versions/web_static_$(date '+%Y%m%d%H%M%S').tgz"
     local("mkdir -p versions")
     local("tar -czvf {} web_static/".format(dest))
-    archive_path = "versions/" + local("ls -t versions/ | head -1",
+    archive_path = local("ls -t versions/ | head -1",
                                        capture=True)
-    return archive_path
+    if archive_path is None or archive_path == "":
+        return None
+    return "/versions" + archive_path
